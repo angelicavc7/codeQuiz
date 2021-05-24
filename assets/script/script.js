@@ -1,23 +1,6 @@
 
 //create variables
-
-var quizContainer = document.querySelector("#quiz");
-var correctAnswer = document.querySelector("#answers");
-var questionEl = document.querySelector("#question");
-var startButton = document.querySelector("start");
-
-
-var answer1EL = document.querySelector(".answer1");
-var answer2El = document.querySelector(".answer2");
-var answer3El = document.querySelector(".answer3");
-var answer4El = document.querySelector(".answer4");
-var answer5El = document.querySelector(".answer5");
-var answerButtons = document.querySelectorAll(".answerbuttons");
-
-var currentIndex = [0]
-
-
-var questionsArray =[{
+var questionsArray = [{
 
     question: "Why do the sharks attack Marlin and Dory in Finding Nemo?",
 
@@ -25,7 +8,6 @@ var questionsArray =[{
     answer2: "They got angry because Dory insulted them",
     answer3: "Marlin's nose starts to bleed",
     answer4: "There plan was to eat them all along",
-    answer5: "They didn't attack, there was no shark scene",
     correctAnswer: "Marlin's nose starts to bleed"
     
  },
@@ -36,7 +18,6 @@ var questionsArray =[{
     answer2: "Un Poco loco",
     answer3: "Remember me",
     answer4: "The world is my family",
-    answer5: "El Latido de Mi Corazon",
     correctAnswer: "Remember Me"
 
  },
@@ -48,7 +29,6 @@ var questionsArray =[{
     answer2: "Chocolate",
     answer3: "Lemon",
     answer4: "Rasberry Sorbet",
-    answer5: "Mango Sorbet",
     correctAnswer: "Lemon"
 },
 
@@ -59,7 +39,6 @@ var questionsArray =[{
     answer2: "Milk",
     answer3: "Plant",
     answer4: "Eva",
-    answer5: "Lighbulb",
     correctAnswer: "Plant"
 },
 
@@ -70,48 +49,104 @@ var questionsArray =[{
     answer2: "Turmeric",
     answer3: "Cardamom",
     answer4: "Cayenne Pepper",
-    answer5: "Black Pepper",
     correctAnswer: "Saffron"
-},
-
-{
-    
-    question: "Which of the following is not a Pixar Movie",
-
-    answer1: "Cars",
-    answer2: "Toy Story",
-    answer3: "Shrek",
-    answer4: "A Bugs Life",
-    answer5: "Inside Out",
-    correctAnswer: "Shrek"
 }];
 
-console.log(questionsArray.length)
+      var currentIndex = 0;
+      var questionEl = document.querySelector("#question");
+      var answer1El = document.querySelector(".answer1");
+      var answer2El = document.querySelector(".answer2");
+      var answer3El = document.querySelector(".answer3");
+      var answer4El = document.querySelector(".answer4");
+     
+      var answerButtons = document.querySelectorAll(".answer");
+      var startBtn = document.querySelector(".button");
+      var quizEl = document.querySelector("#quiz");
+      var messageEl = document.querySelector("#message");
+      var submitEl = document.querySelector("#submit")
+      var backEl = document.querySelector("#back")
+      var highschoreEl = document.querySelector("#highscores")
 
-function displayQuestions(){
 
-    questionEl.textContent = questionsArray[currentIndex].question
-    answer1El.textContent = questionsArray[currentIndex].answer1
-    answer2El.textContent = questionsArray[currentIndex].answer2
-    answer3El.textContent = questionsArray[currentIndex].answer3
-    answer4El.textContent = questionsArray[currentIndex].answer4
-    answer5El.textcontent = questionsArray[currentIndex].answer5
+      function displayQuestion() {
+        questionEl.textContent = questionsArray[currentIndex].question
+        answer1El.textContent = questionsArray[currentIndex].answer1
+        answer2El.textContent = questionsArray[currentIndex].answer2
+        answer3El.textContent = questionsArray[currentIndex].answer3
+        answer4El.textContent = questionsArray[currentIndex].answer4
+        // correctAnswer = questionsArray[currentIndex]
+      } 
+
+   /**
+ * toggle an element's display on/off
+ * @param {HTMLElement} element 
+ */
+       function toggleElementDisplay(element) {
+        if (window.getComputedStyle(element).display === "none") {
+          element.style.display = "block"
+        } else {
+          element.style.display = "none"
+        }
+      }
+      //probably more useful in this case to have two functions with one purpose each
+      function show(element) {
+        element.style.display = "block"
+      }
+      function hide(element) {
+        element.style.display = "none"
+      }
+
+      answerButtons.forEach(function (ansBtn) {
+        ansBtn.addEventListener("click", function (event) {
+          var userGuess = event.target.textContent
+          console.log(userGuess)
+          if (userGuess === questionsArray[currentIndex].correctAnswer){
+            console.log("You got it right")
+            currentIndex++
+            displayQuestion()
+            console.log(currentIndex)
+          } else {
+            console.log("WRONG")
+          }    
+        })
+      })
+
+      startBtn.addEventListener("click", function () {
+        toggleElementDisplay(messageEl)
+        toggleElementDisplay(quizEl)
+      })
+      displayQuestion()
+
+
+
+
+
+
+// startBtn.addEventListener("click", function () {
+          
+var timeEl = document.querySelector(".time");
+// Selects element by id
+var mainEl = document.getElementById("seconds");
+
+var secondsLeft = 60;
+
+    function startTimer() {
+//   Sets interval in variable
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + "seconds left";
+
+    if(secondsLeft === 0) {
+//      Stops execution of action at set interval
+      clearInterval(timerInterval);
+//       Calls function to create and append image
+      sendMessage();
+    }
+
+  }, 1000);
 }
-
-
-
-for (var i = 0; i < questionsArray.length; i++) { 
-    questionsArray[currentIndex].question = "Why do sharks attack Marlin and Dory in finding Nemo?"
- 
-    console.log("Why do sharks attack Marlin and Dory in Finding Nemo?", answerButtons);
-    if(userGuess === questionsArray[currentIndex].correctAnswer) {
-        console.log("Correct")
-        alert("Correct!")
-        currentIndex++
-        displayQuestion()
-      } else {
-        console.log("WRONG!")
-      })s
+// })
+// // Function to take away 15 seconds each time question answerer wrong 
 
 
 
