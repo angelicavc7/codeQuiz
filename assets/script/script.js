@@ -66,6 +66,7 @@ var questionsArray = [{
       var submitEl = document.querySelector("#submit")
       var backEl = document.querySelector("#back")
       var highschoreEl = document.querySelector("#highscores")
+      var right = document.querySelector('#right')
 
 
       function displayQuestion() {
@@ -98,19 +99,24 @@ var questionsArray = [{
 
       answerButtons.forEach(function (ansBtn) {
         ansBtn.addEventListener("click", function (event) {
-          var userGuess = event.target.textContent
-          console.log(userGuess)
-          if (userGuess === questionsArray[currentIndex].correctAnswer){
-            console.log("You got it right")
-            currentIndex++
-            displayQuestion()
-            console.log(currentIndex)
+          var userGuess = event.target.textContent;
+          if (userGuess === questionsArray[currentIndex].correctAnswer) {
+            right.textContent = "You got it right!";
+            console.log("You got it right");
           } else {
-            console.log("WRONG")
-          }    
-        })
-      })
-
+            right.textContent = "YOU GO IT WRONG!!";
+            console.log("WRONG");
+          }
+          currentIndex++;
+          console.log(currentIndex, questionsArray.length);
+          if (currentIndex === questionsArray.length) {
+            console.log("game over");
+            endGame();
+          } else {
+            displayQuestion();
+          }
+        });
+      });
       startBtn.addEventListener("click", function () {
         toggleElementDisplay(messageEl)
         toggleElementDisplay(quizEl)
