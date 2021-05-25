@@ -28,9 +28,9 @@ What are the steps required to install your project? Provide a step-by-step desc
 
 ## Usage
 
-    ![web page](/assets/images/codeQ.png)
- 
+ ![page 1](./images/codeQ.png)
+  ![page 2](./images/codeQ1.png)
+![page 3](./images/codeQ2.png)
 
-    ```
 
 
