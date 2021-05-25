@@ -73,6 +73,7 @@ var questionsArray = [{
       var tableScores = document.querySelector("#tableScores")
       var finalScoreEl = document.querySelector("#score");
       var timeEl = document.querySelector("#seconds");
+      var initials = document.querySelector("#initials2")
      
       var currentIndex = 0;
       var score = 0
@@ -173,7 +174,7 @@ var questionsArray = [{
 
               var highScore = {
                   initials: initials.value,
-                  score: score
+                  totalScore: score
               }
             var localScores = [json.parse(localStorage.getItem("localScores"))];
 
@@ -181,17 +182,17 @@ var questionsArray = [{
                 localScores.push(highscore);
                 localStorage.setItem("localScores", json.stringify(localScores));
                 console.log(localScores);
-                highScore()
+                highScores()
             } else {
                 localScores.push(highScore);
                 localStorage.setItem("localScores", json.stringify(localScores));
                 console.log(localScores);
-                highScore()
+                highScores()
             }
           })
         };
 
-        function highscore(){
+        function highscores(){
             done.setAttribute("style", "display: none");
             view.setAttribute("style", "display: flex");
             var savedScores = json.parse(localStorage.getItem("savedScores"));
