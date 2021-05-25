@@ -31,6 +31,7 @@
    <section>
         <p> This quiz will be on how well you know pixar movies. You will start out with a timer of 1 minute and for every question you get wrong you will be deducted 15 seconds from your timer. For every question you get right 15 seconds will be added. Good Luck!</p>
     ,</section>
+    
     <section>  
         <button class = button>Start Quiz</button>
     </section>
@@ -52,18 +53,22 @@
     <p id = "right"></p>
 </main>
 
-<section>
+<section id = "done">
     <h1>All Done!</h1>
-    <p>Your final score is </p>
+    <div>
+        <p>Enter Initials <textarea></textarea></p>
+    </div>
+    <div>Your final score is <p id = "score"></p> </div>
     
     <button id= "submit">Submit</button>
 </section>
 
-    <section>
+    <section id = "view">
+        <h1>Highscores</h1>
+        <p id = "tableScores"></p>
         <button id = "back">Go back</button>
-        <button id = "Highscores"> View Highscores</button>
+        <button id = "Highscores"> clear Highscores</button>
     </section>
-
 
 
     <script src="assets/script/script.js"></script>
