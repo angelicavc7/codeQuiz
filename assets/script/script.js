@@ -70,8 +70,8 @@ var questionsArray = [{
       var done = document.querySelector("#done")
       var view = document.querySelector("#view")
       var tableScores = document.querySelector("#tableScores")
-      var finalScore = document.querySelector("#score");
-      var timeEl = document.querySelector(".time");
+      var finalScoreEl = document.querySelector("#score");
+      var timeEl = document.querySelector(".seconds");
      
       var currentIndex = 0;
       var score = 0
@@ -89,17 +89,14 @@ var questionsArray = [{
       } 
 
      function startTimer(){
-        
 //   Sets timer and interval in variable
     var timerInterval = setInterval(function() {
     secondsLeft--;
-    timerEl.textContent = secondsLeft + "secondsLeft";
-    timerEl.style.visibility = "visible"
-
+    timeEl.textContent = secondsLeft;
     if(secondsLeft === 0) {
-        clearInterval(timeEl);  
+        clearInterval(timerInterval);  
     } else if (endQuiz === true){
-        clearInterval(timerEl)
+        clearInterval(timerInterval)
     }
   }, 1000);
 
@@ -138,31 +135,64 @@ var questionsArray = [{
           } else {
             right.textContent = "WRONG!!";
             console.log("WRONG");
+            // secondsLeft = secondsLeft-10;
           }
           
           currentIndex++;
           console.log(currentIndex, questionsArray.length);
           if (currentIndex === questionsArray.length) {
             console.log("game over");
-            finalScore()
+            totalScore = score
+            console.log("score", score)
             
           } else {
             displayQuestion();
+            finalScore()
           }
         });
       });
 
       function finalScore(){
-        
+          messageEl.setAttribute("style", "display: none");
+          done.setAttribute("style","display:flex");
+          finalScoreEl.textContent = score;
+          endQuiz = true;
 
-        
+          submitBtn.addEventListener("click", function(event){
+              event.preventDefault();
+
+              var highScore = {
+                  initials: initials.value,
+                  score: score
+              }
+            var localScores = [json.parse(localStorage.getItem("localScores"))];
+
+            if (localScores !== null){
+                localScores.push(highscore);
+                localStorage.setItem("localScores", json.stringify(localScores));
+                console.log(localScores);
+                highScores()
+            } else {
+                localScores.push(highScore);
+                localStorage.setItem("localScores", json.stringify(localScores));
+                console.log(localScores);
+                highScores()
+            }
+          })
         };
+
+        function highscore(){
+            done.setAttribute("style", "display: none");
+            view.setAttribute("style", "display: flex");
+
+        }
 
       startBtn.addEventListener("click", function () {
         toggleElementDisplay(messageEl)
         toggleElementDisplay(quizEl)
-        toggleElementDisplay(done)
-        toggleElementDisplay(view)
+        startTimer();
+        done.setAttribute("style", "display: none");
+        view.setAttribute("style", "display: none");
       })
       displayQuestion()
     
