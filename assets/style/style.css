@@ -29,6 +29,13 @@ main {
     border-radius: 5px;
     border: 1px solid black;
 }
+.answer{
+    background-color: rgb(40, 33, 90);
+    padding: 5px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
 
 #message{
     text-align: center;
