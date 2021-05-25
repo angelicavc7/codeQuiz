@@ -61,17 +61,18 @@ var questionsArray = [{
       var startBtn = document.querySelector(".button");
       var submitBtn = document.querySelector("#submit")
       var backBtn = document.querySelector("#back")
-      var highscoreBtn = document.querySelector("#Highscores")  
+      var highscoreBtn = document.querySelector("#Highscores") 
+      var ViewHighscoreBtn = document.querySelector("#viewhighscore") 
 
 
       var quizEl = document.querySelector("#quiz");
       var messageEl = document.querySelector("#message");
       var right = document.querySelector('#right')
-      var done = document.querySelector("#done")
-      var view = document.querySelector("#view")
+      var doneEl = document.querySelector("#done")
+      var viewEl = document.querySelector("#view")
       var tableScores = document.querySelector("#tableScores")
       var finalScoreEl = document.querySelector("#score");
-      var timeEl = document.querySelector(".seconds");
+      var timeEl = document.querySelector("#seconds");
      
       var currentIndex = 0;
       var score = 0
@@ -113,7 +114,7 @@ var questionsArray = [{
           element.style.display = "block"
         } else {
           element.style.display = "none"
-        }
+        } 
       }
       //probably more useful in this case to have two functions with one purpose each
       function show(element) {
@@ -122,6 +123,13 @@ var questionsArray = [{
       function hide(element) {
         element.style.display = "none"
       }
+      function hide(element) {
+        element.style.display = "none"
+      }
+      function hide(element) {
+        element.style.display = "none"
+      }
+      
       
             
       answerButtons.forEach(function (ansBtn) {
@@ -132,10 +140,11 @@ var questionsArray = [{
             console.log("score is:" + score)
             right.textContent = "You got it right!";
             console.log("You got it right");
+             secondsLeft = secondsLeft+10;
           } else {
             right.textContent = "WRONG!!";
             console.log("WRONG");
-            // secondsLeft = secondsLeft-10;
+            secondsLeft = secondsLeft-10;
           }
           
           currentIndex++;
@@ -144,16 +153,17 @@ var questionsArray = [{
             console.log("game over");
             totalScore = score
             console.log("score", score)
+            finalScore()
             
           } else {
             displayQuestion();
-            finalScore()
           }
         });
       });
 
       function finalScore(){
-          messageEl.setAttribute("style", "display: none");
+          quizEl.setAttribute("style", "display: none");
+          view.setAttribute("style", "display: none")
           done.setAttribute("style","display:flex");
           finalScoreEl.textContent = score;
           endQuiz = true;
@@ -171,12 +181,12 @@ var questionsArray = [{
                 localScores.push(highscore);
                 localStorage.setItem("localScores", json.stringify(localScores));
                 console.log(localScores);
-                highScores()
+                highScore()
             } else {
                 localScores.push(highScore);
                 localStorage.setItem("localScores", json.stringify(localScores));
                 console.log(localScores);
-                highScores()
+                highScore()
             }
           })
         };
@@ -184,15 +194,15 @@ var questionsArray = [{
         function highscore(){
             done.setAttribute("style", "display: none");
             view.setAttribute("style", "display: flex");
+            var savedScores = json.parse(localStorage.getItem("savedScores"));
 
         }
-
+ 
       startBtn.addEventListener("click", function () {
         toggleElementDisplay(messageEl)
         toggleElementDisplay(quizEl)
         startTimer();
-        done.setAttribute("style", "display: none");
-        view.setAttribute("style", "display: none");
+       
       })
       displayQuestion()
     
