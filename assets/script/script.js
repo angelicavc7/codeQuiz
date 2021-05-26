@@ -175,43 +175,38 @@ var questionsArray = [{
       }
   
       function highScores(){
-
-          done.setAttribute("style", "display: none");
-          view.setAttribute("style", "display: flex");
+        done.setAttribute("style", "display: none");
+        view.setAttribute("style", "display: flex");
           var list = [];
-  function renderList() {
-  userScore.innerHTML = "";
-  // Render a new li 
-  for (var i = 0; i < list.length; i++) {
-    var listEl = list[i];
-
-    var li = document.createElement("li");
-    li.textContent = listEl;
-    li.setAttribute("data-index", initials, finalScoreEl);
-
-    li.appendChild(i);
-    userScore.appendChild(li);
-  }
-}
-function init() {
-  // Get stored todos from localStorage
-  var storedlist = JSON.parse(localStorage.getItem("list"));
-
-  if (storedlist !== null) {
-    list = storedlist;
-  }
-  renderList();
-}
-
-function storeList() {
-  localStorage.setItem("list", JSON.stringify(list));
-}
-  storeList();
-  renderList();
-init()
+          function renderList() {
+            userScore.innerHTML = "";
+            // Render a new li 
+            for (var i = 0; i < list.length; i++) {
+              var listEl = list[i];
+              var li = document.createElement("li");
+              li.textContent = listEl;
+              li.setAttribute("data-index", initials, finalScoreEl);
+              li.appendChild(i);
+            userScore.appendChild(li);
+          }
+      }
+          function init() {
+          var storedlist = JSON.parse(localStorage.getItem("list"));
+            if (storedlist !== null) {
+             list = storedlist;
+            }
+           renderList();
+          }
+        function storeList() {
+          localStorage.setItem("list", JSON.stringify(list));
+        }
+        storeList();
+        renderList();
+        init()
           
       }
-  
+  //couldnt get highscores to show up on the listed items
+
       backBtn.addEventListener("click", function() {
         messageEl.setAttribute("style", "display: flex");
         quizEl.setAttribute("style", "display: none")
